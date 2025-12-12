@@ -1,167 +1,84 @@
-# ✅ **README.md (готовий файл)**
+# Pet Project
 
-```markdown
-<h1 align="center">🚀 Pet Project — Next.js + Strapi + Docker</h1>
+## Backend (Strapi)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Next.js-14-black?logo=nextdotjs" />
-  <img src="https://img.shields.io/badge/Strapi-5.0-8A3FFC?logo=strapi" />
-  <img src="https://img.shields.io/badge/Docker-✓-0db7ed?logo=docker" />
-  <img src="https://img.shields.io/badge/PostgreSQL-15-316192?logo=postgresql" />
-</p>
-
-<p align="center">
-  Full-stack pet project using <b>Next.js</b> frontend + <b>Strapi CMS</b> backend,  
-  packaged into <b>Docker containers</b>.
-</p>
-
----
-
-## 📁 **Project Structure**
-
-```
-
-pet-project/
-├── backend/        # Strapi CMS
-├── frontend/       # Next.js App
-├── docker-compose.yml
-└── README.md
-
-````
-
----
-
-# 🐳 **Running the Project with Docker**
-
-### 1️⃣ **Build and start all containers**
-```bash
-docker compose up --build
-````
-
-### 2️⃣ **Available services**
-
-| Service               | URL                                                        |
-| --------------------- | ---------------------------------------------------------- |
-| 🌐 Frontend (Next.js) | [http://localhost](http://localhost)                       |
-| 🛠️ Strapi Admin      | [http://localhost:1337/admin](http://localhost:1337/admin) |
-| 🗄️ API               | [http://localhost:1337/api](http://localhost:1337/api)     |
-| 🐘 PostgreSQL         | localhost:5432                                             |
-
-> ⚠️ У продакшн-режимі Strapi забороняє редагування моделей.
-> Для розробки запускай Strapi у дев-режимі (нижче).
-
----
-
-# 🛠️ **Development Mode**
-
-### **Start Strapi in dev mode (зміни контент-типів ✨)**
-
+### Встановлення та запуск
+1. Перейти в папку `backend`:
 ```bash
 cd backend
+```
+2. Встановити залежності:
+```bash
+yarn install
+```
+3. Запустити Strapi у development-режимі:
+```bash
 yarn develop
 ```
+4. Відкрити адмінку Strapi:
+```
+http://localhost:1337/admin
+```
 
-### **Start frontend**
+### Нотатки
+- Для production режиму використовуйте:
+```bash
+yarn build
+yarn start
+```
+- Файли `.env` не додаються у репозиторій, треба створити локально.
 
+## Frontend (Next.js)
+
+### Встановлення та запуск
+1. Перейти в папку `frontend`:
 ```bash
 cd frontend
+```
+2. Встановити залежності:
+```bash
+yarn install
+```
+3. Запустити dev-сервер:
+```bash
 yarn dev
 ```
-
----
-
-# 🔧 **Environment Variables**
-
-### **Backend (.env.example)**
-
+4. Відкрити сайт:
 ```
-APP_KEYS=your-app-keys
-API_TOKEN_SALT=your-token-salt
-ADMIN_JWT_SECRET=your-secret
-TRANSFER_TOKEN_SALT=your-salt
-DATABASE_CLIENT=postgres
-DATABASE_HOST=db
-DATABASE_PORT=5432
-DATABASE_NAME=strapi_db
-DATABASE_USERNAME=strapi
-DATABASE_PASSWORD=strapi
+http://localhost:3000
 ```
 
-### **Frontend (.env.local.example)**
+### Нотатки
+- Використовується SCSS для стилів.
+- Всі зміни фронтенду автоматично оновлюються на dev-сервері.
 
+## Docker (опційно)
+
+### Запуск усіх сервісів
+1. З кореневої папки проекту:
+```bash
+docker compose up --build
 ```
-NEXT_PUBLIC_API_URL=http://localhost:1337
-```
+2. Переконайтеся, що:
+   - `backend` підключений до бази даних Postgres.
+   - `frontend` підключений до бекенду Strapi.
 
----
+### Порти
+- Strapi: `http://localhost:1337`
+- Frontend: `http://localhost:3000`
+- Nginx: `http://localhost`
 
-# 📜 **Git Setup**
+## Git
 
-### ❗ Do NOT commit node_modules
-
-`.gitignore` already excludes:
-
+### .gitignore
+Рекомендовані налаштування:
 ```
 node_modules/
-.build/
+frontend/.next/
+backend/.tmp/
+backend/.strapi/
+.env
 dist/
-.strapi/
+.output/
 ```
-
-### **Initialize repo**
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin https://github.com/USERNAME/pet-project.git
-git push -u origin main
-```
-
----
-
-# 📦 **Production Build**
-
-### **Build frontend**
-
-```bash
-cd frontend
-yarn build
-```
-
-### **Build Strapi**
-
-```bash
-cd backend
-yarn build
-```
-
-### **Start all**
-
-```bash
-docker compose up -d
-```
-
----
-
-# 🧪 **API example**
-
-Get articles:
-
-```
-GET http://localhost:1337/api/articles
-```
-
----
-
-# 🙋‍♀️ **Author**
-
-**Oleksandra**
-Pet project for learning full-stack development 💛
-
----
-
-# ⭐ **If you like this project — give it a star on GitHub!**
-
-```
+- Ніколи не пушимо `node_modules` або build-папки.
