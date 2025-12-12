@@ -1,0 +1,24 @@
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn.lock
+package-lock.json
+
+# Next.js / Frontend build
+.next/
+dist/
+out/
+
+# Strapi / Backend build
+.build/
+.strapi/
+.tmp/
+
+# Env files
+.env
+.env.*.local
+
+# OS
+.DS_Store
+Thumbs.db
