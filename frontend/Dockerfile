@@ -1,6 +1,5 @@
 FROM node:20-alpine
 
-# Створюємо робочу папку
 WORKDIR /app
 
 # Встановлюємо пакети для SCSS
@@ -12,11 +11,9 @@ COPY package.json yarn.lock ./
 # Встановлюємо залежності
 RUN yarn install
 
-# Копіюємо весь код
+# Копіюємо весь фронтенд
 COPY . .
 
-# Відкриваємо порт Next.js
 EXPOSE 3000
 
-# Запуск у development режимі
 CMD ["yarn", "dev"]

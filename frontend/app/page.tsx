@@ -7,7 +7,7 @@ export default function Page() {
   const [articles, setArticles] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/articles`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles`)
       .then(res => res.json())
       .then(data => setArticles(data.data || []))
       .catch(() => setArticles([]));

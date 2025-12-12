@@ -1,84 +1,111 @@
-# Pet Project
+# Pet Project - Садочок для дітей
 
-## Backend (Strapi)
+Цей проєкт складається з фронтенду на Next.js та бекенду на Strapi, все запускається через Docker Compose.
 
-### Встановлення та запуск
-1. Перейти в папку `backend`:
+---
+
+## Структура проєкту
+
+- **Садочок (Kindergarten)**
+  - Керується головним адміністратором (директор або співробітник)
+  - Має пов'язаних користувачів: батьків, дітей, вихователів
+
+- **Користувачі**
+  - Батьки
+    - Прив'язані до своїх дітей через ключ-зв'язку
+  - Діти
+    - Можуть отримувати нагороди та відмітки за їжу та участь в івентах
+  - Вихователі
+    - Прив'язані до садочка
+    - Можуть ставити івенти та нагороди для дітей
+
+- **Інші функціональні блоки**
+  - Дошка з розкладом та календарем івентів
+  - Можливість вихователя обрати подію та видати нагороду
+  - Відмітки за сніданок/обід/полуденок
+  - Дошка оголошень для новин та фотозвітів
+  - Рахунки за надані послуги
+
+---
+
+## Вимоги
+
+- Docker та Docker Compose
+- Node.js (для локальної розробки, якщо потрібно)
+- Git
+
+---
+
+## Запуск проєкту
+
+1. **Клонування репозиторію**
+
 ```bash
-cd backend
-```
-2. Встановити залежності:
-```bash
-yarn install
-```
-3. Запустити Strapi у development-режимі:
-```bash
-yarn develop
-```
-4. Відкрити адмінку Strapi:
-```
-http://localhost:1337/admin
+git clone https://github.com/hrolick-git/pet-project.git
+cd pet-project
 ```
 
-### Нотатки
-- Для production режиму використовуйте:
-```bash
-yarn build
-yarn start
-```
-- Файли `.env` не додаються у репозиторій, треба створити локально.
+2. **Підняття контейнерів через Docker Compose**
 
-## Frontend (Next.js)
-
-### Встановлення та запуск
-1. Перейти в папку `frontend`:
-```bash
-cd frontend
-```
-2. Встановити залежності:
-```bash
-yarn install
-```
-3. Запустити dev-сервер:
-```bash
-yarn dev
-```
-4. Відкрити сайт:
-```
-http://localhost:3000
-```
-
-### Нотатки
-- Використовується SCSS для стилів.
-- Всі зміни фронтенду автоматично оновлюються на dev-сервері.
-
-## Docker (опційно)
-
-### Запуск усіх сервісів
-1. З кореневої папки проекту:
 ```bash
 docker compose up --build
 ```
-2. Переконайтеся, що:
-   - `backend` підключений до бази даних Postgres.
-   - `frontend` підключений до бекенду Strapi.
 
-### Порти
-- Strapi: `http://localhost:1337`
-- Frontend: `http://localhost:3000`
-- Nginx: `http://localhost`
+Це підніме наступні сервіси:
+- `pet-project-frontend` - фронтенд, доступний за http://localhost
+- `pet-project-strapi` - бекенд Strapi, доступний за http://localhost:1337/admin
+- `pet-project-postgres` - база даних Postgres
+- `pet-project-nginx` - nginx, проксі для фронтенду
 
-## Git
+3. **Перевірка логів**
 
-### .gitignore
-Рекомендовані налаштування:
+```bash
+docker compose logs -f <service_name>
+# наприклад:
+docker compose logs -f pet-project-strapi
+```
+
+4. **Зупинка контейнерів**
+
+```bash
+docker compose down
+```
+
+---
+
+## Розробка
+
+Якщо хочеш працювати локально без Docker:
+
+- Для Strapi:
+```bash
+cd backend
+yarn develop
+```
+- Для фронтенду:
+```bash
+cd frontend
+yarn dev
+```
+
+---
+
+## .gitignore
+
+Проєкт ігнорує наступні файли та папки:
 ```
 node_modules/
 frontend/.next/
-backend/.tmp/
-backend/.strapi/
-.env
+backend/node_modules/
 dist/
-.output/
+.env
 ```
-- Ніколи не пушимо `node_modules` або build-папки.
+
+---
+
+## Контакти та допомога
+
+- Основна документація Strapi: https://strapi.io/documentation
+- Основна документація Next.js: https://nextjs.org/docs
+- Для питань по Docker: https://docs.docker.com/compose/
+

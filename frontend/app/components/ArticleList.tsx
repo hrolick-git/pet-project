@@ -9,7 +9,8 @@ export default function ArticleList({ articles }: { articles: any[] }) {
       {articles.length > 0 ? (
         articles.map(a => (
           <li key={a.id} className={styles.item}>
-            {a.attributes?.title || 'No title'}
+            {console.log('Rendering article:', a)}
+            {a.title || 'No title'}
           </li>
         ))
       ) : (
